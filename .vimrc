@@ -1,4 +1,5 @@
 set number
+set relativenumber
 set showcmd
 set shiftwidth=4
 set tabstop=4
@@ -14,12 +15,17 @@ set ignorecase
 
 set autoread
 set mouse=a
+set scrolloff=10
 
 set nocompatible
 
 "filetype on
 filetype plugin on
 filetype indent on
+
+set writebackup
+set nobackup
+set noswapfile
 
 set viminfo+=!
 set iskeyword+=_,$,@,%,#,-,.
@@ -65,7 +71,8 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'Align'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Yggdroot/indentLine'
-Plugin 'Shougo/neocomplcache.vim'
+Plugin 'Shougo/neocomplete.vim'
+Plugin 'davidhalter/jedi-vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'repeat.vim'
@@ -86,11 +93,23 @@ nmap <leader>il :IndentLinesToggle<CR>
 let g:indentline_color_term = 239
 "=====================================
 
-"neocomplcache
+"neocomplete
 "=====================================
-let g:neocomplcache_enable_at_startup = 1
-" let g:neocomplcache_disable_auto_complete = 1
+" autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+let g:acp_enableAtStarup = 0
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+" let g:neocomplete_disable_auto_complete = 1
 " ====================================
+
+"jedi-vim
+"=====================================
+autocmd FileType python3 setlocal omnifunc=jedi#Complete
+"
+"
+"=====================================
 
 "nerdcommenter
 "=====================================
